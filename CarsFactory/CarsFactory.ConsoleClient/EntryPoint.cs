@@ -4,10 +4,11 @@
     using System.Linq;
     using Data;
     using Models;
+    using Reports;
 
-    class EntryPoint
+    public class EntryPoint
     {
-        static void Main()
+        public static void Main()
         {
             TestMsSqlServer();
         }
@@ -20,6 +21,8 @@
                 TestAddData(carsFactoryContext);
                 TestReadData(carsFactoryContext);
                 TestRemoveData(carsFactoryContext);
+
+                JsonRepor.GenerateJsonReports(carsFactoryContext);
             }
         }
 
@@ -27,8 +30,15 @@
         {
             var coutry = carsFactoryContext.Countries.FirstOrDefault();
             carsFactoryContext.Countries.Remove(coutry);
-            var changes = carsFactoryContext.SaveChanges();
-            Console.WriteLine("{0} row(s) removed.", changes);
+            try
+            {
+                var changes = carsFactoryContext.SaveChanges();
+                Console.WriteLine("{0} row(s) removed.", changes);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
 
         private static void TestAddData(CarsFactoryContext carsFactoryContext)

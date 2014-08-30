@@ -1,0 +1,9 @@
+{
+  "Manufacturer": {
+    "Name": "VW"
+  },
+  "Model": "Golf 3",
+  "HorsePower": 75,
+  "ReleaseYear": "1995-01-01T00:00:00",
+  "Price": 3300.00
+}
