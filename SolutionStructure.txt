@@ -1,0 +1,33 @@
+CarsFactory (BMW Factory)
+		|
+		| - CarsFactory.Models
+		| 		- Address
+		| 		- Town
+		| 		- Country
+		|
+		|		- Dealer - 
+		| 		- Product
+		| 		- EngineType - enum
+				- CarType - enum
+				- Sale
+				- SaleReport
+				
+		| - CarsFactory.Data
+		| 		- CarsFactoryDBContext : DbContext Class
+					DbSets: Addresses, Towns, Countries, Manufactures, Products, ProductTypes
+				- Migrations/Configuration (? console command) 
+					- Seeded data ?
+		| - CarsFactory.ConsoleClient
+		|		- EntryPoint
+				- App.Config - Connection String
+				
+				
+				
+				
+-- MySql server - partiotioning
+-- MongoDb sever - mongolab
+	- carsdealer - must create new one
+	- account: griffin, pass: telerik
+	- mongodb://<dbuser>:<dbpassword>@ds063929.mongolab.com:63929/carsdealer
+
+	
