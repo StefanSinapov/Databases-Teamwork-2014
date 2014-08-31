@@ -12,7 +12,7 @@
 
         public int HorsePower { get; set; }
 
-        public DateTime ReleaseYear { get; set; }
+        public int ReleaseYear { get; set; }
 
         public decimal Price { get; set; }
     }

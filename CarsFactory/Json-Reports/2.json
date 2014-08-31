@@ -1,9 +1,17 @@
 {
-  "Manufacturer": {
-    "Name": "Mercedes"
+  "CarType": {
+    "Id": 2,
+    "Name": "Coupe"
   },
-  "Model": "Benz",
-  "HorsePower": 3000,
-  "ReleaseYear": "2012-06-23T00:00:00",
-  "Price": 50000.00
+  "EngineType": {
+    "Id": 1,
+    "Name": "Gasoline"
+  },
+  "Manufacturer": {
+    "Name": "Honda"
+  },
+  "Model": "Honda Integra Type R",
+  "HorsePower": 156,
+  "ReleaseYear": 1998,
+  "Price": 36000.00
 }

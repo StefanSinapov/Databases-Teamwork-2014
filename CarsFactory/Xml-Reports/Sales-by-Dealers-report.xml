@@ -1,2 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<sales />
+<sales>
+	<sale dealer="Plovdiv Enterprise" />
+	<sale dealer="Varna CarsHeaven" />
+	<sale dealer="Pleven Motorsport" />
+	<sale dealer="Burgas MonserTruck" />
+	<sale dealer="Pernik GolfGodfather" />
+	<sale dealer="Vidin DreamworksMotorsport" />
+	<sale dealer="Albena WestCoastMotors" />
+	<sale dealer="Blagoevgrad ExtremeMotors" />
+	<sale dealer="Ruse PlatinumMotorsport" />
+	<sale dealer="Shumen UltimateCarsShop" />
+</sales>

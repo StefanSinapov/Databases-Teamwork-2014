@@ -1,9 +1,17 @@
 {
-  "Manufacturer": {
-    "Name": "Ford"
+  "CarType": {
+    "Id": 4,
+    "Name": "Convertible"
   },
-  "Model": "Avtom",
-  "HorsePower": 2,
-  "ReleaseYear": "1999-01-01T00:00:00",
-  "Price": 10.50
+  "EngineType": {
+    "Id": 1,
+    "Name": "Gasoline"
+  },
+  "Manufacturer": {
+    "Name": "BMW"
+  },
+  "Model": "BMW E93",
+  "HorsePower": 232,
+  "ReleaseYear": 2011,
+  "Price": 56000.00
 }
