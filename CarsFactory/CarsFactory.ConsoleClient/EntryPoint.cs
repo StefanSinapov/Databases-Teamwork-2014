@@ -5,6 +5,7 @@
 
     using CarsFactory.Reports.Client;
     using Data;
+    using Loaders;
     using Models;
     using Reports;
 
@@ -26,7 +27,7 @@
 
                 JsonRepor.GenerateJsonReports(carsFactoryContext);
                 XmlReport.GenerateXmlReports(carsFactoryContext);
-                //XmlLoader.LoadXmlFile(carsFactoryContext);
+                XmlLoader.LoadXmlFile(carsFactoryContext);
                 //CarsFactoryReportsClient.GenerateReports(carsFactoryContext);
             }
         }
