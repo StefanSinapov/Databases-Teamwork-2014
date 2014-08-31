@@ -1,6 +1,7 @@
 ﻿namespace CarsFactory.Data
 {
     using System.Data.Entity;
+    using Migrations;
     using Models;
 
     public class CarsFactoryContext : DbContext
@@ -9,7 +10,7 @@
         public CarsFactoryContext()
             : base("CarsFactory")
         {
-            //Database.SetInitializer(new MigrateDatabaseToLatestVersion<CarsFactoryContext, Configuration>());
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<CarsFactoryContext, Configuration>());
         }
 
         public CarsFactoryContext(string connectionString)
