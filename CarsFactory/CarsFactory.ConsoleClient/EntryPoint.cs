@@ -23,6 +23,7 @@
                 TestRemoveData(carsFactoryContext);
 
                 JsonRepor.GenerateJsonReports(carsFactoryContext);
+                XmlReport.GenerateXmlReports(carsFactoryContext);
             }
         }
 

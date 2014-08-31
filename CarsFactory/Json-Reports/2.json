@@ -1,9 +1,9 @@
 {
   "Manufacturer": {
-    "Name": "VW"
+    "Name": "Mercedes"
   },
-  "Model": "Golf V",
-  "HorsePower": 105,
-  "ReleaseYear": "2005-05-05T00:00:00",
-  "Price": 15000.00
+  "Model": "Benz",
+  "HorsePower": 3000,
+  "ReleaseYear": "2012-06-23T00:00:00",
+  "Price": 50000.00
 }
