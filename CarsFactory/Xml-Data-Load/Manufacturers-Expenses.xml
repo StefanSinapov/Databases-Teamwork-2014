@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<expenses-by-month>
+  <manufacturer name="Ford">
+    <expenses month="7">30.00</expenses>
+    <expenses month="8">40.00</expenses>
+  </manufacturer>
+  <manufacturer name="Renault">
+    <expenses month="6">200.00</expenses>
+    <expenses month="8">180.00</expenses>
+  </manufacturer>
+  <manufacturer name="Chevrolet">
+    <expenses month="9">120.00</expenses>
+    <expenses month="10">180.00</expenses>
+  </manufacturer>
+</expenses-by-month>

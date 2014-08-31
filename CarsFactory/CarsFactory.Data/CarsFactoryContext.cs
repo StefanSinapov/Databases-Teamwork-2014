@@ -34,5 +34,10 @@
         public DbSet<SalesReport> SalesReports { get; set; }
 
         public DbSet<Town> Towns { get; set; }
+
+        public DbSet<Month> Months { get; set; }
+
+        public DbSet<Expense> Expenses { get; set; }
+
     }
 }

@@ -1,27 +1,22 @@
 ﻿namespace CarsFactory.Models
 {
+    using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    using System.Runtime.Serialization;
 
-    [DataContract]
-    public class Manufacturer
+    public class Month
     {
         private ICollection<Expense> expenses;
 
-        public Manufacturer()
+        public Month()
         {
             this.expenses = new HashSet<Expense>();
         }
 
         [Key]
-        public int Id { get; set; }
+        public int MonthId { get; set; }
 
-        [DataMember]
-        [Required]
         public string Name { get; set; }
-
-        public int ExpenseId { get; set; }
 
         public virtual ICollection<Expense> Expenses
         {
@@ -33,11 +28,6 @@
             {
                 this.expenses = value;
             }
-        }
-
-        public override string ToString()
-        {
-            return this.Name;
         }
     }
 }

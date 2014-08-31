@@ -5,6 +5,7 @@
     using Data;
     using Models;
     using Reports;
+    using Loaders;
 
     public class EntryPoint
     {
@@ -20,10 +21,11 @@
             {
                 TestAddData(carsFactoryContext);
                 TestReadData(carsFactoryContext);
-                TestRemoveData(carsFactoryContext);
+                //TestRemoveData(carsFactoryContext);
 
                 JsonRepor.GenerateJsonReports(carsFactoryContext);
                 XmlReport.GenerateXmlReports(carsFactoryContext);
+                XmlLoader.LoadXmlFile(carsFactoryContext);
             }
         }
 

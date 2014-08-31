@@ -4,16 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{2C13130E-89C7-4A2C-88B3-B658C2F21541}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <ProjectGuid>{FCC9CF05-1EFD-4927-9360-95509BDCE41C}</ProjectGuid>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CarsFactory.ConsoleClient</RootNamespace>
-    <AssemblyName>CarsFactory.ConsoleClient</AssemblyName>
+    <RootNamespace>CarsFactory.Loaders</RootNamespace>
+    <AssemblyName>CarsFactory.Loaders</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -23,7 +22,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -31,11 +29,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup>
-    <StartupObject>CarsFactory.ConsoleClient.EntryPoint</StartupObject>
-  </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework">
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer">
@@ -51,30 +47,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EntryPoint.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
-    <None Include="packages.config" />
+    <Compile Include="XmlLoader.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CarsFactory.Data\CarsFactory.Data.csproj">
       <Project>{2b9c3a2a-d176-496e-bbd2-4ac0b3a33cf7}</Project>
       <Name>CarsFactory.Data</Name>
     </ProjectReference>
-    <ProjectReference Include="..\CarsFactory.Loaders\CarsFactory.Loaders.csproj">
-      <Project>{fcc9cf05-1efd-4927-9360-95509bdce41c}</Project>
-      <Name>CarsFactory.Loaders</Name>
-    </ProjectReference>
     <ProjectReference Include="..\CarsFactory.Models\CarsFactory.Models.csproj">
       <Project>{139e8d3d-dba2-4a78-9315-f5d539fd1fdf}</Project>
       <Name>CarsFactory.Models</Name>
     </ProjectReference>
-    <ProjectReference Include="..\CarsFactory.Reports\CarsFactory.Reports.csproj">
-      <Project>{7283913d-0967-4b64-8434-8fd0f0630d44}</Project>
-      <Name>CarsFactory.Reports</Name>
-    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
