@@ -115,7 +115,7 @@
                         CarTypeId = product["CarTypeId"].ToInt32(),
                         EngineTypeId = product["EngineTypeId"].ToInt32(),
                         ReleaseYear = product["ReleaseYear"].ToInt32(),
-                        Price = (decimal)product["Price"]
+                        Price = (decimal)product["Price"].ToDouble()
                     });
             }
         }
