@@ -21,8 +21,6 @@
         [Required]
         public string Name { get; set; }
 
-        public int ExpenseId { get; set; }
-
         public virtual ICollection<Expense> Expenses
         {
             get
