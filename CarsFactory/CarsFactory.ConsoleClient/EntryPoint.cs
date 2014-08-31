@@ -3,6 +3,7 @@
     using System;
     using System.Linq;
     using Data;
+    using Data.MongoDb;
     using Models;
     using Reports;
 
@@ -11,18 +12,41 @@
         public static void Main()
         {
             TestMsSqlServer();
+            //TestMongoDbSever();
+        }
+
+        private static void TestMongoDbSever()
+        {
+            Console.WriteLine("Connecting to MongoDb Server...");
+
+            var mongoDb = new MongoDbDatabase();
+            mongoDb.PrintCollection("Countries");
+
+
+        }
+
+        private static void LoadDataFromMongoDb(CarsFactoryContext context)
+        {
+            Console.WriteLine("Loading Data From MongoDB to MS SQL Server...");
+
+            var mongoDb = new MongoDbDatabase();
+            mongoDb.LoadAllDataToMsSql(context);
         }
 
         private static void TestMsSqlServer()
         {
+            Console.WriteLine("Connecting to MS SQL Server...");
+
             var carsFactoryContext = new CarsFactoryContext();
             using (carsFactoryContext)
             {
-                TestAddData(carsFactoryContext);
-                TestReadData(carsFactoryContext);
-                TestRemoveData(carsFactoryContext);
+                LoadDataFromMongoDb(carsFactoryContext);
 
-                JsonRepor.GenerateJsonReports(carsFactoryContext);
+                //TestAddData(carsFactoryContext);
+                //TestReadData(carsFactoryContext);
+                //TestRemoveData(carsFactoryContext);
+
+                //JsonRepor.GenerateJsonReports(carsFactoryContext);
             }
         }
 
@@ -45,8 +69,9 @@
         {
             var country = new Country
             {
-                Name = "Sofia"
+                Name = "Bulgaria"
             };
+            
             carsFactoryContext.Countries.Add(country);
             var changes = carsFactoryContext.SaveChanges();
             Console.WriteLine("{0} row(s) added.", changes);
