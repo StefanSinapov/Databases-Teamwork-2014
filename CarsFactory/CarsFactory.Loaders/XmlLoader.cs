@@ -62,14 +62,21 @@
                                     Value = expenseeValue
                                 };
 
-                                context.Expenses.Add(expense);
-                                context.SaveChanges();
+                                var expenseExists = context.Expenses.Any(e => e.ManafacturerId == manafacturer.Id);
 
-                                manafacturer.ExpenseId = expense.ExpenseId;
-                                context.SaveChanges();
+                                if (!expenseExists)
+                                {
+                                    context.Expenses.Add(expense);
+                                    context.SaveChanges();
+
+                                    manafacturer.ExpenseId = expense.ExpenseId;
+                                    context.SaveChanges();
+
+                                }
+
                             }
 
-                            else if ((reader.NodeType == XmlNodeType.Element) &&
+                            else if ((reader.NodeType == XmlNodeType.EndElement) &&
                            (reader.Name == "manufacturer"))
                             {
                                 break;
