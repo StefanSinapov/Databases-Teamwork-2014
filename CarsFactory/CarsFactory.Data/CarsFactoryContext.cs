@@ -1,4 +1,4 @@
-﻿namespace CarsFactory.Data
+namespace CarsFactory.Data
 {
     using System.Data.Entity;
     using Migrations;
@@ -21,10 +21,10 @@
 
         public DbSet<Product> Products { get; set; }
 
-        public DbSet<CarType> CarTypes { get; set; }
+		public DbSet<CarType> CarTypes { get; set; }
 
         public DbSet<EngineType> EngineTypes { get; set; } 
-
+		
         public DbSet<Manufacturer> Manufacturers { get; set; }
 
         public DbSet<Address> Addresses { get; set; }
@@ -38,5 +38,10 @@
         public DbSet<SalesReport> SalesReports { get; set; }
 
         public DbSet<Town> Towns { get; set; }
+
+        public DbSet<Month> Months { get; set; }
+
+        public DbSet<Expense> Expenses { get; set; }
+
     }
 }

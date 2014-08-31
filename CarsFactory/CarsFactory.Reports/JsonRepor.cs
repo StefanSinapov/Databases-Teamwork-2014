@@ -10,25 +10,20 @@
     {
         public static void GenerateJsonReports(CarsFactoryContext carsFactoryContext)
         {
-           // var carsFactoryContext = new CarsFactoryContext();
-            
-            using (carsFactoryContext)
+            var productsList = carsFactoryContext.Products.SqlQuery("SELECT * FROM PRODUCTS").ToList();
+
+            foreach (var item in productsList)
             {
-                var productsList = carsFactoryContext.Products.SqlQuery("SELECT * FROM PRODUCTS").ToList();
+                int id = item.Id;
+                string jsonReportPath = @"..\..\..\Json-Reports\" + id + ".json";
 
-                foreach (var item in productsList)
+                StreamWriter writer = new StreamWriter(jsonReportPath, false);
+
+                string productAsJson = JsonConvert.SerializeObject(item, Formatting.Indented);
+
+                using (writer)
                 {
-                    int id = item.Id;
-                    string jsonReportPath = @"..\..\..\Json-Reports\" + id + ".json";
-
-                    StreamWriter writer = new StreamWriter(jsonReportPath, false);
-
-                    string productAsJson = JsonConvert.SerializeObject(item, Formatting.Indented);
-
-                    using (writer)
-                    {
-                        writer.WriteLine(productAsJson);
-                    }
+                    writer.WriteLine(productAsJson);
                 }
             }
         }

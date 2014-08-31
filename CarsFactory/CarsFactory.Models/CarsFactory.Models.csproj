@@ -52,7 +52,9 @@
     <Compile Include="Country.cs" />
     <Compile Include="Dealer.cs" />
     <Compile Include="EngineType.cs" />
+    <Compile Include="Expense.cs" />
     <Compile Include="Manufacturer.cs" />
+    <Compile Include="Month.cs" />
     <Compile Include="Product.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sale.cs" />
