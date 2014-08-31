@@ -1,11 +1,2 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<sales>
-	<sale dealer="Pesho">
-		<summary report-date="16/05/2014 00:00:00" total-sum="190000.00" />
-		<summary report-date="16/06/2014 00:00:00" total-sum="190000.00" />
-		<summary report-date="31/05/2013 00:00:00" total-sum="15000.00" />
-	</sale>
-	<sale dealer="Gosho">
-		<summary report-date="23/04/2012 00:00:00" total-sum="140000.00" />
-	</sale>
-</sales>
+<sales />

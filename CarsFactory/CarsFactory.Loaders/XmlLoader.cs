@@ -9,6 +9,7 @@
 
     public class XmlLoader
     {
+        
         public static void LoadXmlFile(CarsFactoryContext context)
         {
             string fileName = @"..\..\..\Xml-Data-Load\Manufacturers-Expenses.xml";
@@ -38,15 +39,15 @@
                             if ((reader.NodeType == XmlNodeType.Element) &&
                                 (reader.Name == "expenses"))
                             {
-                                var monthId = int.Parse(reader.GetAttribute("month"));
+                                var monthName = reader.GetAttribute("month");
                                 var expenseeValue = decimal.Parse(reader.ReadElementString());
 
-                                var monthExists = context.Months.Any(m => m.MonthId == monthId);
+                                var monthExists = context.Months.Any(m => m.Name == monthName);
                                 if (!monthExists)
                                 {
                                     var month = new Month
                                     {
-                                        MonthId = monthId,
+                                        Name = monthName
                                     };
 
                                     context.Months.Add(month);
@@ -54,10 +55,11 @@
                                 }
 
                                 var manafacturer = context.Manufacturers.First(m => m.Name == manafacturerName);
+                                var selectedMonth = context.Months.First(m => m.Name == monthName);
 
                                 var expense = new Expense
                                 {
-                                    MonthId = monthId,
+                                    MonthId = selectedMonth.MonthId,
                                     ManafacturerId = manafacturer.Id,
                                     Value = expenseeValue
                                 };
@@ -68,11 +70,10 @@
                                 {
                                     context.Expenses.Add(expense);
                                     context.SaveChanges();
-
-                                    manafacturer.ExpenseId = expense.ExpenseId;
-                                    context.SaveChanges();
-
                                 }
+
+                                manafacturer.Expenses.Add(expense);
+                                context.SaveChanges();
 
                             }
 
