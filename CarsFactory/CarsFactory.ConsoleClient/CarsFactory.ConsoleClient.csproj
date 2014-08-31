@@ -71,6 +71,10 @@
       <Project>{139e8d3d-dba2-4a78-9315-f5d539fd1fdf}</Project>
       <Name>CarsFactory.Models</Name>
     </ProjectReference>
+    <ProjectReference Include="..\CarsFactory.Reports.Client\CarsFactory.Reports.Client.csproj">
+      <Project>{cafd1c7c-f0d5-485c-b75d-309422b7935c}</Project>
+      <Name>CarsFactory.Reports.Client</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CarsFactory.Reports\CarsFactory.Reports.csproj">
       <Project>{7283913d-0967-4b64-8434-8fd0f0630d44}</Project>
       <Name>CarsFactory.Reports</Name>

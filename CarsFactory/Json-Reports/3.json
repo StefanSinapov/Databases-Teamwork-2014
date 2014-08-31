@@ -1,9 +1,9 @@
 {
   "Manufacturer": {
-    "Name": "VW"
+    "Name": "Ford"
   },
-  "Model": "Golf 3",
-  "HorsePower": 75,
-  "ReleaseYear": "1995-01-01T00:00:00",
-  "Price": 3300.00
+  "Model": "DidkosMobile",
+  "HorsePower": 12,
+  "ReleaseYear": "2000-02-02T00:00:00",
+  "Price": 12.00
 }

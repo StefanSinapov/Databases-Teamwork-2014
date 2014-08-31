@@ -2,10 +2,11 @@
 {
     using System;
     using System.Linq;
+
+    using CarsFactory.Reports.Client;
     using Data;
     using Models;
     using Reports;
-    using Loaders;
 
     public class EntryPoint
     {
@@ -25,7 +26,8 @@
 
                 JsonRepor.GenerateJsonReports(carsFactoryContext);
                 XmlReport.GenerateXmlReports(carsFactoryContext);
-                XmlLoader.LoadXmlFile(carsFactoryContext);
+                //XmlLoader.LoadXmlFile(carsFactoryContext);
+                //CarsFactoryReportsClient.GenerateReports(carsFactoryContext);
             }
         }
 

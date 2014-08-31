@@ -1,9 +1,9 @@
 {
   "Manufacturer": {
-    "Name": "Skoda"
+    "Name": "Ford"
   },
-  "Model": "Fabia",
-  "HorsePower": 2000,
-  "ReleaseYear": "2014-08-15T00:00:00",
-  "Price": 20000.00
+  "Model": "Avtom",
+  "HorsePower": 2,
+  "ReleaseYear": "1999-01-01T00:00:00",
+  "Price": 10.50
 }
