@@ -19,7 +19,7 @@
         public int HorsePower { get; set; }
 
         [DataMember]
-        public DateTime ReleaseYear { get; set; }
+        public int ReleaseYear { get; set; }
 
         [DataMember]
         public decimal Price { get; set; }
@@ -27,11 +27,19 @@
         [ForeignKey("Manufacturer")]
         public int ManufacturerId { get; set; }
 
+        [ForeignKey("CarType")]
+        public int CarTypeId { get; set; }
+
+        [ForeignKey("EngineType")]
+        public int EngineTypeId { get; set; }
+
         [DataMember]
         public virtual Manufacturer Manufacturer { get; set; }
 
+        [DataMember]
         public virtual EngineType EngineType { get; set; }
 
+        [DataMember]
         public virtual CarType CarType { get; set; }
     }
 }

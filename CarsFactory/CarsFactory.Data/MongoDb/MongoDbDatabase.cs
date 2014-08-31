@@ -49,10 +49,50 @@
             LoadTowns();
             LoadAddresses();
             LoadManufacturers();
+            LoadCarTypes();
+            LoadEngineTypes();
             LoadDealers();
             LoadProducts();
 
             context.SaveChanges();
+        }
+
+        private void LoadEngineTypes()
+        {
+            if (this.context.EngineTypes.Any())
+            {
+                return;
+            }
+
+            var engineTypes = GetItemsFromCollection("EngineTypes");
+            foreach (var engineType in engineTypes)
+            {
+                this.context.EngineTypes.Add(
+                    new EngineType
+                    {
+                        Id = engineType["EngineTypeId"].ToInt32(),
+                        Name = engineType["Name"].ToString()
+                    });
+            }
+        }
+
+        private void LoadCarTypes()
+        {
+            if (this.context.CarTypes.Any())
+            {
+                return;
+            }
+
+            var carTypes = GetItemsFromCollection("CarTypes");
+            foreach (var carType in carTypes)
+            {
+                this.context.CarTypes.Add(
+                    new CarType
+                    {
+                        Id = carType["CarTypeId"].ToInt32(),
+                        Name = carType["Name"].ToString()
+                    });
+            }
         }
 
         private void LoadProducts()
@@ -72,7 +112,9 @@
                         Model = product["Model"].ToString(),
                         HorsePower = product["HorsePower"].ToInt32(),
                         ManufacturerId = product["ManufacturerId"].ToInt32(),
-                        //                        ReleaseYear = product["ReleaseYear"].ToInt32(),
+                        CarTypeId = product["CarTypeId"].ToInt32(),
+                        EngineTypeId = product["EngineTypeId"].ToInt32(),
+                        ReleaseYear = product["ReleaseYear"].ToInt32(),
                         Price = (decimal)product["Price"]
                     });
             }

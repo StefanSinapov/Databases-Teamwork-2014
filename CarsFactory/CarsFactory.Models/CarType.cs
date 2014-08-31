@@ -1,12 +1,20 @@
 ﻿namespace CarsFactory.Models
 {
-    public enum CarType
+    using System.ComponentModel.DataAnnotations;
+    using System.Runtime.Serialization;
+
+    public class CarType
     {
-        Sedan = 1,
-        Coupe = 2,
-        Touring = 3,
-        Convertible = 4,
-        Roadster = 5,
-        Suv = 6
+        [Key]
+        public int Id { get; set; }
+
+        [DataMember]
+        [Required]
+        public string Name { get; set; }
+
+        public override string ToString()
+        {
+            return this.Name;
+        }
     }
 }

@@ -1,9 +1,20 @@
 ﻿namespace CarsFactory.Models
 {
-    public enum EngineType
+    using System.ComponentModel.DataAnnotations;
+    using System.Runtime.Serialization;
+
+    public class EngineType
     {
-        Gasoline = 1,
-        Diesel = 2,
-        Electric = 3
+        [Key]
+        public int Id { get; set; }
+
+        [DataMember]
+        [Required]
+        public string Name { get; set; }
+
+        public override string ToString()
+        {
+            return this.Name;
+        }
     }
 }

@@ -21,6 +21,10 @@
 
         public DbSet<Product> Products { get; set; }
 
+        public DbSet<CarType> CarTypes { get; set; }
+
+        public DbSet<EngineType> EngineTypes { get; set; } 
+
         public DbSet<Manufacturer> Manufacturers { get; set; }
 
         public DbSet<Address> Addresses { get; set; }
