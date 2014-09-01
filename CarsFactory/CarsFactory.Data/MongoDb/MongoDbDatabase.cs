@@ -3,10 +3,12 @@
     using System;
     using System.Collections.Generic;
     using System.Configuration;
+    using System.Globalization;
     using System.Linq;
     using Models;
     using MongoDB.Bson;
     using MongoDB.Driver;
+    using MongoDB.Driver.Builders;
 
     public class MongoDbDatabase
     {
@@ -220,12 +222,73 @@
             }
         }
 
+        public void UploadManufacturer(Manufacturer manufacturer)
+        {
+            var manufacturersCollection = GetCollection("Manufacturers");
+            var manufacturerExists = manufacturersCollection
+                .Find(Query<Manufacturer>.EQ(e => e.Name, manufacturer.Name))
+                .Any();
+            if(manufacturerExists)
+            {
+                return;
+            }
+
+            var newManufacturer = new BsonDocument();
+            newManufacturer["ManufacturerId"] = manufacturer.Id;
+            newManufacturer["Name"] = manufacturer.Name;
+            manufacturersCollection.Insert(newManufacturer);
+        }
+
+        public void UploadMonth(Month month)
+        {
+            var monthsCollection = GetCollection("Months");
+            var monthExists = monthsCollection
+                .Find(Query<Month>.EQ(m => m.Name, month.Name))
+                .Any();
+            if (monthExists)
+            {
+                return;
+            }
+
+            var newMonth = new BsonDocument();
+            newMonth["MonthId"] = month.MonthId;
+            newMonth["Name"] = month.Name;
+            monthsCollection.Insert(newMonth);
+        }
+
+        public void UploadExpense(Expense expense)
+        {
+            var expensesCollection = GetCollection("Expenses");
+            var expenseExists = expensesCollection
+                .Find(Query<Expense>.EQ(e => e.ExpenseId, expense.ExpenseId))
+                .Any();
+            if (expenseExists)
+            {
+                return;
+            }
+
+            var newExpense = new BsonDocument();
+            newExpense["ExpenceId"] = expense.ExpenseId;
+            newExpense["MonthId"] = expense.MonthId;
+            newExpense["ManafacturerId"] = expense.ManafacturerId;
+            //newExpense["Name"] = expense.Name;
+            newExpense["Value"] = expense.Value.ToString(CultureInfo.InvariantCulture);
+
+            expensesCollection.Insert(newExpense);
+        }
+
         private IEnumerable<BsonDocument> GetItemsFromCollection(string collectionName)
+        {
+            var collection = GetCollection(collectionName);
+
+            return collection.FindAll();
+        }
+
+        private MongoCollection<BsonDocument> GetCollection(string collectionName)
         {
             var database = this.GetDatabase(this.databaseName);
             var collection = database.GetCollection(collectionName);
-
-            return collection.FindAll();
+            return collection;
         }
 
         private MongoDatabase GetDatabase(string databaseName)
@@ -236,6 +299,5 @@
             var database = mongoServer.GetDatabase(databaseName);
             return database;
         }
-
     }
 }

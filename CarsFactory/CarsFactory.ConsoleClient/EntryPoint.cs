@@ -29,11 +29,17 @@ namespace CarsFactory.ConsoleClient
                 //TestReadData(carsFactoryContext);
                 //TestRemoveData(carsFactoryContext);
 
-                JsonRepor.GenerateJsonReports(carsFactoryContext);
-                XmlReport.GenerateXmlReports(carsFactoryContext);
-                XmlLoader.LoadXmlFile(carsFactoryContext);
+                //JsonRepor.GenerateJsonReports(carsFactoryContext);
+                //XmlReport.GenerateXmlReports(carsFactoryContext);
+                //LoadXmlFileToSqlAndMongo(carsFactoryContext);
                 //CarsFactoryMySQLData.GenerateProducts(carsFactoryContext);
             }
+        }
+
+        private static void LoadXmlFileToSqlAndMongo(CarsFactoryContext carsFactoryContext)
+        {
+            var mongoDb = new MongoDbDatabase();
+            XmlLoader.LoadXmlFile(carsFactoryContext, mongoDb);
         }
 
         private static void LoadDataFromMongoDb(CarsFactoryContext context)

@@ -6,6 +6,7 @@
 
     using CarsFactory.Models;
     using CarsFactory.Data;
+    using Data.MongoDb;
 
     public class XmlLoader
     {
@@ -15,7 +16,7 @@
         private const string nameAttribute = "name";
         private const string monthAttribute = "month";
 
-        public static void LoadXmlFile(CarsFactoryContext context)
+        public static void LoadXmlFile(CarsFactoryContext context, MongoDbDatabase mongoDb)
         {
             using (XmlReader reader = XmlReader.Create(fileName))
             {
@@ -25,7 +26,7 @@
                         (reader.Name == manufacturerTagName))
                     {
                         var manufacturerName = reader.GetAttribute(nameAttribute);
-                        AddManufacturer(context, manufacturerName);
+                        AddManufacturer(context, mongoDb, manufacturerName);
 
                         while (reader.Read())
                         {
@@ -33,14 +34,14 @@
                                 (reader.Name == expensesTagName))
                             {
                                 var monthName = reader.GetAttribute(monthAttribute);
-                                AddMonth(context, monthName);
+                                AddMonth(context, mongoDb, monthName);
 
                                 var expenseValue = decimal.Parse(reader.ReadElementString());
 
                                 var manufacturer = context.Manufacturers.First(m => m.Name == manufacturerName);
                                 var selectedMonth = context.Months.First(m => m.Name == monthName);
 
-                                AddExpense(context, manufacturer, selectedMonth, expenseValue);
+                                AddExpense(context, mongoDb, manufacturer, selectedMonth, expenseValue);
                             }
 
                             else if ((reader.NodeType == XmlNodeType.EndElement) &&
@@ -54,7 +55,7 @@
             }
         }
 
-        private static void AddManufacturer(CarsFactoryContext context, string manufacturerName)
+        private static void AddManufacturer(CarsFactoryContext context, MongoDbDatabase mongoDb, string manufacturerName)
         {
             var manufacturerExists = context.Manufacturers.Any(m => m.Name == manufacturerName);
 
@@ -67,10 +68,11 @@
 
                 context.Manufacturers.Add(manafacturer);
                 context.SaveChanges();
+                mongoDb.UploadManufacturer(manafacturer);
             }
         }
 
-        private static void AddMonth(CarsFactoryContext context, string monthName)
+        private static void AddMonth(CarsFactoryContext context, MongoDbDatabase mongoDb, string monthName)
         {
             var monthExists = context.Months.Any(m => m.Name == monthName);
 
@@ -83,11 +85,12 @@
 
                 context.Months.Add(month);
                 context.SaveChanges();
+                mongoDb.UploadMonth(month);
             }
         }
 
-        private static void AddExpense(CarsFactoryContext context, Manufacturer manufacturer,
-                                       Month selectedMonth, decimal expenseValue)
+        private static void AddExpense(CarsFactoryContext context, MongoDbDatabase mongoDb,
+                    Manufacturer manufacturer,  Month selectedMonth, decimal expenseValue)
         {
             var expenseExists = context.Expenses.Any(e => e.ManafacturerId == manufacturer.Id &&
                                                                          e.MonthId == selectedMonth.MonthId &&
@@ -104,6 +107,7 @@
 
                 context.Expenses.Add(expense);
                 context.SaveChanges();
+                mongoDb.UploadExpense(expense);
             }
         }
     }
