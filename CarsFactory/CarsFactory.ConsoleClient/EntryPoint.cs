@@ -54,6 +54,16 @@ namespace CarsFactory.ConsoleClient
             Console.ResetColor();
         }
 
+        private static void ZipReadingAndImporting(CarsFactoryContext carsFactoryContext)
+        {
+            var zipPath = @"..\..\..\Sample-Sales-Reports.zip";
+            var unzipDirectory = @"..\..\..\TempExtractZip";
+
+            var zipReader = new ZipImporter(zipPath, unzipDirectory);
+
+            zipReader.ReadAndImport(carsFactoryContext);
+        }
+
         private static void TestRemoveData(CarsFactoryContext carsFactoryContext)
         {
             var coutry = carsFactoryContext.Countries.FirstOrDefault();
