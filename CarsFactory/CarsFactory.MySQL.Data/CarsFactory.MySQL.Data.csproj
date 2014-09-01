@@ -7,7 +7,7 @@
     <ProjectGuid>{CAFD1C7C-F0D5-485C-B75D-309422B7935C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CarsFactory.Reports.Client</RootNamespace>
+    <RootNamespace>CarsFactory.MySQL.Data</RootNamespace>
     <AssemblyName>CarsFactory.Reports.Client</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -58,7 +58,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CarsFactoryReportsClient.cs" />
+    <Compile Include="CarsFactoryMySQLData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -70,9 +70,9 @@
       <Project>{139e8d3d-dba2-4a78-9315-f5d539fd1fdf}</Project>
       <Name>CarsFactory.Models</Name>
     </ProjectReference>
-    <ProjectReference Include="..\CarsFactory.Reports.Models\CarsFactory.Reports.Models.csproj">
+    <ProjectReference Include="..\CarsFactory.MySQL.Models\CarsFactory.MySQL.Models.csproj">
       <Project>{6f9c2621-695c-4bde-881b-157dcaa75c07}</Project>
-      <Name>CarsFactory.Reports.Models</Name>
+      <Name>CarsFactory.MySQL.Models</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -1,31 +1,31 @@
-namespace CarsFactory.Reports.Models
+namespace CarsFactory.MySQL.Models
 {
     using System.Collections.Generic;
 
     using Telerik.OpenAccess.Metadata;
     using Telerik.OpenAccess.Metadata.Fluent;
 
-    public partial class CarsFactoryReportsMetadataSource : FluentMetadataSource
+    public partial class CarsFactoryMySQLMetadataSource : FluentMetadataSource
     {
         protected override IList<MappingConfiguration> PrepareMapping()
         {
             List<MappingConfiguration> configurations = new List<MappingConfiguration>();
 
-            var reportMapping = new MappingConfiguration<Report>();
+            var productMapping = new MappingConfiguration<Product>();
 
-            reportMapping.MapType(report => new
+            productMapping.MapType(product => new
             {
-                ID = report.ID,
-                ManufacturerName = report.ManufacturerName,
-                Model = report.Model,
-                HorsePower = report.HorsePower,
-                ReleaseYear = report.ReleaseYear,
-                Price = report.Price
-            }).ToTable("Reports");
+                ID = product.ID,
+                ManufacturerName = product.ManufacturerName,
+                Model = product.Model,
+                HorsePower = product.HorsePower,
+                ReleaseYear = product.ReleaseYear,
+                Price = product.Price
+            }).ToTable("Products");
 
-            reportMapping.HasProperty(r => r.ID).IsIdentity(KeyGenerator.Autoinc);
+            productMapping.HasProperty(p => p.ID).IsIdentity(KeyGenerator.Autoinc);
 
-            configurations.Add(reportMapping);
+            configurations.Add(productMapping);
 
             return configurations;
         }

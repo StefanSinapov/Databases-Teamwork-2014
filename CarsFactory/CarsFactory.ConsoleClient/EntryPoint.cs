@@ -3,12 +3,12 @@ namespace CarsFactory.ConsoleClient
     using System;
     using System.Linq;
 
-    using CarsFactory.Reports.Client;
+    using CarsFactory.MySQL.Data;
     using Data;
-	using Data.MongoDb;
+    using Data.MongoDb;
     using Loaders;
     using Models;
-    using Reports;
+    using MySQL;
 
     public class EntryPoint
     {
@@ -23,8 +23,8 @@ namespace CarsFactory.ConsoleClient
             using (carsFactoryContext)
             {
                 //Console.WriteLine("Connecting to MS SQL Server...");
-				//LoadDataFromMongoDb(carsFactoryContext);
-			
+                //LoadDataFromMongoDb(carsFactoryContext);
+
                 //TestAddData(carsFactoryContext);
                 //TestReadData(carsFactoryContext);
                 //TestRemoveData(carsFactoryContext);
@@ -32,11 +32,11 @@ namespace CarsFactory.ConsoleClient
                 JsonRepor.GenerateJsonReports(carsFactoryContext);
                 XmlReport.GenerateXmlReports(carsFactoryContext);
                 XmlLoader.LoadXmlFile(carsFactoryContext);
-                //CarsFactoryReportsClient.GenerateReports(carsFactoryContext);
+                //CarsFactoryMySQLData.GenerateProducts(carsFactoryContext);
             }
         }
-		
-		private static void LoadDataFromMongoDb(CarsFactoryContext context)
+
+        private static void LoadDataFromMongoDb(CarsFactoryContext context)
         {
             Console.WriteLine("Loading Data From MongoDB to MS SQL Server...");
 
@@ -44,7 +44,7 @@ namespace CarsFactory.ConsoleClient
             mongoDb.LoadAllDataToMsSql(context);
 
             Console.ForegroundColor = ConsoleColor.Green;
-		    Console.WriteLine("     Done");
+            Console.WriteLine("     Done");
             Console.ResetColor();
         }
 
