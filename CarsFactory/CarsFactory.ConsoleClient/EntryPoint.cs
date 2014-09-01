@@ -22,16 +22,16 @@ namespace CarsFactory.ConsoleClient
             var carsFactoryContext = new CarsFactoryContext();
             using (carsFactoryContext)
             {
-                Console.WriteLine("Connecting to MS SQL Server...");
+                //Console.WriteLine("Connecting to MS SQL Server...");
 				//LoadDataFromMongoDb(carsFactoryContext);
 			
                 //TestAddData(carsFactoryContext);
                 //TestReadData(carsFactoryContext);
                 //TestRemoveData(carsFactoryContext);
 
-                //JsonRepor.GenerateJsonReports(carsFactoryContext);
-                //XmlReport.GenerateXmlReports(carsFactoryContext);
-                //XmlLoader.LoadXmlFile(carsFactoryContext);
+                JsonRepor.GenerateJsonReports(carsFactoryContext);
+                XmlReport.GenerateXmlReports(carsFactoryContext);
+                XmlLoader.LoadXmlFile(carsFactoryContext);
                 //CarsFactoryReportsClient.GenerateReports(carsFactoryContext);
             }
         }
