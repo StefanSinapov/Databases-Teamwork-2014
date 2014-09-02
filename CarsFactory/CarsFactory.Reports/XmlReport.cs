@@ -5,6 +5,7 @@
     using System.Xml;
 
     using CarsFactory.Data;
+    using Data;
 
     public class XmlReport
     {
@@ -13,7 +14,12 @@
             string xmlReportPath = @"..\..\..\Xml-Reports\Sales-by-Dealers-report.xml";
             Encoding encoding = Encoding.GetEncoding("utf-8");
 
-            var dealers = context.Dealers.ToList();
+            //var dealers = context.Dealers.Select(d => new
+            //                                          {
+            //                                              Name = d.Name,
+            //                                              SalesReports = d.SalesReports
+            //                                          });
+            var dealers = CollectReportsData.CollectDataForXmlReport(context);
 
             using (XmlTextWriter writer = new XmlTextWriter(xmlReportPath, encoding))
             {

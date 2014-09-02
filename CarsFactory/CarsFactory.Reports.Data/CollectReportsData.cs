@@ -15,9 +15,15 @@
             return productsList;
         }
 
-        public static ICollection<Dealer> CollectDataForXmlReport(CarsFactoryContext carsFactoryContext)
+        public static dynamic CollectDataForXmlReport(CarsFactoryContext carsFactoryContext)
         {
-            return null;
+            var dealers = carsFactoryContext.Dealers.Select(d => new
+            {
+                Name = d.Name,
+                SalesReports = d.SalesReports
+            }).ToList();
+
+            return dealers;
         }
 
         public static ICollection<Product> CollectDataForPdfReport(CarsFactoryContext carsFactoryContext)
