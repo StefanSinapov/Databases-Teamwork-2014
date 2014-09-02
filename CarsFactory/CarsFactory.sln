@@ -13,9 +13,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarsFactory.Reports", "Cars
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarsFactory.Loaders", "CarsFactory.Loaders\CarsFactory.Loaders.csproj", "{FCC9CF05-1EFD-4927-9360-95509BDCE41C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarsFactory.Reports.Models", "CarsFactory.Reports.Models\CarsFactory.Reports.Models.csproj", "{6F9C2621-695C-4BDE-881B-157DCAA75C07}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarsFactory.MySQL.Data", "CarsFactory.MySQL.Data\CarsFactory.MySQL.Data.csproj", "{CAFD1C7C-F0D5-485C-B75D-309422B7935C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarsFactory.Reports.Client", "CarsFactory.Reports.Client\CarsFactory.Reports.Client.csproj", "{CAFD1C7C-F0D5-485C-B75D-309422B7935C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarsFactory.MySQL.Models", "CarsFactory.MySQL.Models\CarsFactory.MySQL.Models.csproj", "{6F9C2621-695C-4BDE-881B-157DCAA75C07}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -43,14 +43,14 @@ Global
 		{FCC9CF05-1EFD-4927-9360-95509BDCE41C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FCC9CF05-1EFD-4927-9360-95509BDCE41C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FCC9CF05-1EFD-4927-9360-95509BDCE41C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6F9C2621-695C-4BDE-881B-157DCAA75C07}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6F9C2621-695C-4BDE-881B-157DCAA75C07}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6F9C2621-695C-4BDE-881B-157DCAA75C07}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6F9C2621-695C-4BDE-881B-157DCAA75C07}.Release|Any CPU.Build.0 = Release|Any CPU
 		{CAFD1C7C-F0D5-485C-B75D-309422B7935C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{CAFD1C7C-F0D5-485C-B75D-309422B7935C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CAFD1C7C-F0D5-485C-B75D-309422B7935C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CAFD1C7C-F0D5-485C-B75D-309422B7935C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6F9C2621-695C-4BDE-881B-157DCAA75C07}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F9C2621-695C-4BDE-881B-157DCAA75C07}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F9C2621-695C-4BDE-881B-157DCAA75C07}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F9C2621-695C-4BDE-881B-157DCAA75C07}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

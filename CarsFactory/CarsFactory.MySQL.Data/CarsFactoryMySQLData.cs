@@ -1,23 +1,23 @@
-﻿namespace CarsFactory.Reports.Client
+﻿namespace CarsFactory.MySQL.Data
 {
     using Telerik.OpenAccess;
 
-    using CarsFactory.Reports.Models;
+    using CarsFactory.MySQL.Models;
     using CarsFactory.Data;
 
-    public class CarsFactoryReportsClient
+    public class CarsFactoryMySQLData
     {
         private const string DatabaseName = "CarsFactoryDB";
 
-        public static void GenerateReports(CarsFactoryContext carsFactoryContext)
+        public static void GenerateProducts(CarsFactoryContext carsFactoryContext)
         {
             UpdateDatabase();
-            SetDataToReports(carsFactoryContext);
+            SetData(carsFactoryContext);
         }
 
         private static void UpdateDatabase()
         {
-            using (var context = new CarsFactoryReports())
+            using (var context = new CarsFactoryMySQL())
             {
                 var schemaHandler = context.GetSchemaHandler();
 
@@ -41,17 +41,17 @@
             }
         }
 
-        private static void SetDataToReports(CarsFactoryContext carsFactoryContext)
+        private static void SetData(CarsFactoryContext carsFactoryContext)
         {
             using (carsFactoryContext)
             {
-                using (var db = new Models.CarsFactoryReports())
+                using (var db = new Models.CarsFactoryMySQL())
                 {
                     var products = carsFactoryContext.Products;
 
                     foreach (var product in products)
                     {
-                        var report = new Report
+                        var newProduct = new Product
                         {
                             ManufacturerName = product.Manufacturer.Name,
                             Model = product.Model,
@@ -60,7 +60,7 @@
                             Price = product.Price
                         };
 
-                        db.Add(report);
+                        db.Add(newProduct);
                     }
 
                     db.SaveChanges();

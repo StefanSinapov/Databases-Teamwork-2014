@@ -1,8 +1,8 @@
-﻿namespace CarsFactory.Reports.Models
+﻿namespace CarsFactory.MySQL.Models
 {
     using System;
 
-    public class Report
+    public class Product
     {
         public int ID { get; set; }
 

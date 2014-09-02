@@ -1,48 +1,48 @@
-namespace CarsFactory.Reports.Models
+namespace CarsFactory.MySQL.Models
 {
     using System.Linq;
 
     using Telerik.OpenAccess;
     using Telerik.OpenAccess.Metadata;
 
-    public partial class CarsFactoryReports : OpenAccessContext, ICarsFactoryReportsUnitOfWork
+    public partial class CarsFactoryMySQL : OpenAccessContext, ICarsFactoryMySQLUnitOfWork
     {
         private static string connectionStringName = @"CarsFactoryDB";
 
         private static BackendConfiguration backend = GetBackendConfiguration();
 
-        private static MetadataSource metadataSource = new CarsFactoryReportsMetadataSource();
+        private static MetadataSource metadataSource = new CarsFactoryMySQLMetadataSource();
 
-        public CarsFactoryReports()
+        public CarsFactoryMySQL()
             : base(connectionStringName, backend, metadataSource)
         {
         }
 
-        public CarsFactoryReports(string connection)
+        public CarsFactoryMySQL(string connection)
             : base(connection, backend, metadataSource)
         {
         }
 
-        public CarsFactoryReports(BackendConfiguration backendConfiguration)
+        public CarsFactoryMySQL(BackendConfiguration backendConfiguration)
             : base(connectionStringName, backendConfiguration, metadataSource)
         {
         }
 
-        public CarsFactoryReports(string connection, MetadataSource metadataSource)
+        public CarsFactoryMySQL(string connection, MetadataSource metadataSource)
             : base(connection, backend, metadataSource)
         {
         }
 
-        public CarsFactoryReports(string connection, BackendConfiguration backendConfiguration, MetadataSource metadataSource)
+        public CarsFactoryMySQL(string connection, BackendConfiguration backendConfiguration, MetadataSource metadataSource)
             : base(connection, backendConfiguration, metadataSource)
         {
         }
 
-        public IQueryable<Report> Reports
+        public IQueryable<Product> Products
         {
             get
             {
-                return this.GetAll<Report>();
+                return this.GetAll<Product>();
             }
         }
 
