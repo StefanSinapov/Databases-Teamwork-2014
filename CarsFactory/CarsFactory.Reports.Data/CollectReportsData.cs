@@ -15,7 +15,7 @@
             return productsList;
         }
 
-        public static dynamic CollectDataForXmlReport(CarsFactoryContext carsFactoryContext)
+        public static Dictionary<string, ICollection<SalesReport>> CollectDataForXmlReport(CarsFactoryContext carsFactoryContext)
         {
             var dealers = carsFactoryContext.Dealers.Select(d => new
             {
@@ -23,7 +23,14 @@
                 SalesReports = d.SalesReports
             }).ToList();
 
-            return dealers;
+            Dictionary<string, ICollection<SalesReport>> result = new Dictionary<string,ICollection<SalesReport>>();
+            
+            foreach (var dealer in dealers)
+            {
+                result[dealer.Name] = dealer.SalesReports;
+            }
+
+            return result;
         }
 
         public static ICollection<Product> CollectDataForPdfReport(CarsFactoryContext carsFactoryContext)

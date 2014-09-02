@@ -1,11 +1,13 @@
 ﻿namespace CarsFactory.Reports
 {
+    using System.Collections.Generic;
     using System.Linq;
     using System.Text;
     using System.Xml;
 
     using CarsFactory.Data;
     using Data;
+    using CarsFactory.Models;
 
     public class XmlReport
     {
@@ -14,11 +16,6 @@
             string xmlReportPath = @"..\..\..\Xml-Reports\Sales-by-Dealers-report.xml";
             Encoding encoding = Encoding.GetEncoding("utf-8");
 
-            //var dealers = context.Dealers.Select(d => new
-            //                                          {
-            //                                              Name = d.Name,
-            //                                              SalesReports = d.SalesReports
-            //                                          });
             var dealers = CollectReportsData.CollectDataForXmlReport(context);
 
             using (XmlTextWriter writer = new XmlTextWriter(xmlReportPath, encoding))
@@ -30,12 +27,13 @@
                 writer.WriteStartDocument();
                 writer.WriteStartElement("sales");
 
-                foreach (var dealer in dealers)
+                // record is KeyValuePair<string, ICollection<SalesReport>> 
+                foreach (var record in dealers)
                 {
-                    var dealerName = dealer.Name;
+                    var dealerName = record.Key;
                     WriteSale(writer, dealerName);
 
-                    foreach (var saleReport in dealer.SalesReports)
+                    foreach (var saleReport in record.Value)
                     {
                         var reportDate = saleReport.ReportDate.ToString();
                         var totalSum = saleReport.TotalSum.ToString();
