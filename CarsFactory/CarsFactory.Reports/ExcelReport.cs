@@ -54,13 +54,21 @@
                     worksheet.Cells[counter, 1].Value = product.ManufacturerName;
                     worksheet.Cells[counter, 2].Value = product.Model;
 
+                    bool existInSQLite = false;
+
                     foreach (var productRejection in productsRejection)
                     {
                         if (product.Model == productRejection.Model)
                         {
                             worksheet.Cells[counter, 3].Value = productRejection.RejectionCount;
+                            existInSQLite = true;
                             break;
                         }
+                    }
+
+                    if (!existInSQLite)
+                    {
+                        worksheet.Cells[counter, 3].Value = 0;
                     }
 
                     counter++;

@@ -1,17 +1,17 @@
 {
-  "Model": "Honda Integra Type R",
-  "HorsePower": 156,
-  "ReleaseYear": 1998,
-  "Price": 36000.0,
-  "Manufacturer": {
-    "Name": "Honda"
+  "CarType": {
+    "Id": 2,
+    "Name": "Coupe"
   },
   "EngineType": {
     "Id": 1,
     "Name": "Gasoline"
   },
-  "CarType": {
-    "Id": 2,
-    "Name": "Coupe"
-  }
+  "Manufacturer": {
+    "Name": "Honda"
+  },
+  "Model": "Honda Integra Type R",
+  "HorsePower": 156,
+  "ReleaseYear": 1998,
+  "Price": 36000.00
 }

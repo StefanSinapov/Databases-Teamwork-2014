@@ -114,6 +114,10 @@
       <Project>{d08f9979-0a5c-4380-a66f-ddd1807a0785}</Project>
       <Name>CarsFactory.Reports.Data</Name>
     </ProjectReference>
+    <ProjectReference Include="..\CarsFactory.SQLite.Data\CarsFactory.SQLite.Data.csproj">
+      <Project>{d92d9cfb-d8d9-4a91-9eb0-d8ed652aa2dc}</Project>
+      <Name>CarsFactory.SQLite.Data</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

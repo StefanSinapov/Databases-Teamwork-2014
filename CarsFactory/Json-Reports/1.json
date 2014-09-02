@@ -1,17 +1,17 @@
 {
-  "Model": "BMW E93",
-  "HorsePower": 232,
-  "ReleaseYear": 2011,
-  "Price": 56000.0,
-  "Manufacturer": {
-    "Name": "BMW"
+  "CarType": {
+    "Id": 4,
+    "Name": "Convertible"
   },
   "EngineType": {
     "Id": 1,
     "Name": "Gasoline"
   },
-  "CarType": {
-    "Id": 4,
-    "Name": "Convertible"
-  }
+  "Manufacturer": {
+    "Name": "BMW"
+  },
+  "Model": "BMW E93",
+  "HorsePower": 232,
+  "ReleaseYear": 2011,
+  "Price": 56000.00
 }

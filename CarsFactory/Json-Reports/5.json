@@ -1,17 +1,17 @@
 {
-  "Model": "Toyota GT86",
-  "HorsePower": 220,
-  "ReleaseYear": 2012,
-  "Price": 130000.0,
-  "Manufacturer": {
-    "Name": "Toyota"
+  "CarType": {
+    "Id": 2,
+    "Name": "Coupe"
   },
   "EngineType": {
     "Id": 1,
     "Name": "Gasoline"
   },
-  "CarType": {
-    "Id": 2,
-    "Name": "Coupe"
-  }
+  "Manufacturer": {
+    "Name": "Toyota"
+  },
+  "Model": "Toyota GT86",
+  "HorsePower": 220,
+  "ReleaseYear": 2012,
+  "Price": 130000.00
 }

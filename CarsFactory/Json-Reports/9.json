@@ -1,17 +1,17 @@
 {
-  "Model": "Nissan GT-R",
-  "HorsePower": 356,
-  "ReleaseYear": 2008,
-  "Price": 110000.0,
-  "Manufacturer": {
-    "Name": "Nissan"
+  "CarType": {
+    "Id": 1,
+    "Name": "Sedan"
   },
   "EngineType": {
     "Id": 1,
     "Name": "Gasoline"
   },
-  "CarType": {
-    "Id": 1,
-    "Name": "Sedan"
-  }
+  "Manufacturer": {
+    "Name": "Nissan"
+  },
+  "Model": "Nissan GT-R",
+  "HorsePower": 356,
+  "ReleaseYear": 2008,
+  "Price": 110000.00
 }

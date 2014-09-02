@@ -1,17 +1,17 @@
 {
-  "Model": "Audi A2",
-  "HorsePower": 89,
-  "ReleaseYear": 1999,
-  "Price": 29000.0,
-  "Manufacturer": {
-    "Name": "Audi"
+  "CarType": {
+    "Id": 3,
+    "Name": "Touring"
   },
   "EngineType": {
     "Id": 1,
     "Name": "Gasoline"
   },
-  "CarType": {
-    "Id": 3,
-    "Name": "Touring"
-  }
+  "Manufacturer": {
+    "Name": "Audi"
+  },
+  "Model": "Audi A2",
+  "HorsePower": 89,
+  "ReleaseYear": 1999,
+  "Price": 29000.00
 }
