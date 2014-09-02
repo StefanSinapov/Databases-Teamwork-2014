@@ -1,5 +1,6 @@
 ﻿namespace CarsFactory.MySQL.Data
 {
+    using System.Linq;
     using Telerik.OpenAccess;
 
     using CarsFactory.MySQL.Models;
@@ -43,28 +44,33 @@
 
         private static void SetData(CarsFactoryContext carsFactoryContext)
         {
-            using (carsFactoryContext)
+            using (var db = new Models.CarsFactoryMySQL())
             {
-                using (var db = new Models.CarsFactoryMySQL())
-                {
-                    var products = carsFactoryContext.Products;
-
-                    foreach (var product in products)
+                var products = carsFactoryContext.Products.Select(p =>
+                    new
                     {
-                        var newProduct = new Product
-                        {
-                            ManufacturerName = product.Manufacturer.Name,
-                            Model = product.Model,
-                            HorsePower = product.HorsePower,
-                            ReleaseYear = product.ReleaseYear,
-                            Price = product.Price
-                        };
+                        p.Model,
+                        ManufacturerName = p.Manufacturer.Name,
+                        p.HorsePower,
+                        p.ReleaseYear,
+                        p.Price
+                    }).ToList();
 
-                        db.Add(newProduct);
-                    }
+                foreach (var product in products)
+                {
+                    var newProduct = new Product
+                    {
+                        ManufacturerName = product.ManufacturerName,
+                        Model = product.Model,
+                        HorsePower = product.HorsePower,
+                        ReleaseYear = product.ReleaseYear,
+                        Price = product.Price
+                    };
 
-                    db.SaveChanges();
+                    db.Add(newProduct);
                 }
+
+                db.SaveChanges();
             }
         }
     }
