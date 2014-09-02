@@ -1,17 +1,17 @@
 {
-  "CarType": {
-    "Id": 6,
-    "Name": "SUV"
+  "Model": "BMW X5",
+  "HorsePower": 188,
+  "ReleaseYear": 1999,
+  "Price": 44000.0,
+  "Manufacturer": {
+    "Name": "BMW"
   },
   "EngineType": {
     "Id": 2,
     "Name": "Diesel"
   },
-  "Manufacturer": {
-    "Name": "BMW"
-  },
-  "Model": "BMW X5",
-  "HorsePower": 188,
-  "ReleaseYear": 1999,
-  "Price": 44000.00
+  "CarType": {
+    "Id": 6,
+    "Name": "SUV"
+  }
 }

@@ -1,6 +1,8 @@
 ﻿namespace CarsFactory.MySQL.Data
 {
+    using System.Collections.Generic;
     using System.Linq;
+
     using Telerik.OpenAccess;
 
     using CarsFactory.MySQL.Models;
@@ -14,6 +16,18 @@
         {
             UpdateDatabase();
             SetData(carsFactoryContext);
+        }
+
+        public static IEnumerable<Product> GetData()
+        {
+            IEnumerable<Product> products = new List<Product>();
+
+            using (var db = new Models.CarsFactoryMySQL())
+            {
+                products = db.Products.OrderBy(p => p.ManufacturerName).ToList();
+            }
+
+            return products;
         }
 
         private static void UpdateDatabase()
