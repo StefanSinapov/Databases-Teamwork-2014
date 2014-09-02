@@ -1,4 +1,4 @@
-﻿namespace CarsFactory.MySQL
+﻿namespace CarsFactory.Reports
 {
     using System;
     using System.Linq;

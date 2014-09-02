@@ -8,6 +8,7 @@ namespace CarsFactory.ConsoleClient
     using Data.MongoDb;
     using Loaders;
     using Models;
+    using Reports;
     using MySQL;
 
     public class EntryPoint
@@ -29,9 +30,10 @@ namespace CarsFactory.ConsoleClient
                 //TestReadData(carsFactoryContext);
                 //TestRemoveData(carsFactoryContext);
 
-                JsonRepor.GenerateJsonReports(carsFactoryContext);
-                XmlReport.GenerateXmlReports(carsFactoryContext);
-                LoadXmlFileToSqlAndMongo(carsFactoryContext);
+                PdfReport.GeneratePdfReport(carsFactoryContext);
+                //JsonRepor.GenerateJsonReports(carsFactoryContext);
+                //XmlReport.GenerateXmlReports(carsFactoryContext);
+                //LoadXmlFileToSqlAndMongo(carsFactoryContext);
                 //CarsFactoryMySQLData.GenerateProducts(carsFactoryContext);
             }
         }
