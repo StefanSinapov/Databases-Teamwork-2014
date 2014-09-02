@@ -30,8 +30,8 @@ namespace CarsFactory.ConsoleClient
                 //TestReadData(carsFactoryContext);
                 //TestRemoveData(carsFactoryContext);
 
-                PdfReport.GeneratePdfReport(carsFactoryContext);
-                //JsonRepor.GenerateJsonReports(carsFactoryContext);
+                //PdfReport.GeneratePdfReport(carsFactoryContext);
+                JsonRepor.GenerateJsonReports(carsFactoryContext);
                 //XmlReport.GenerateXmlReports(carsFactoryContext);
                 //LoadXmlFileToSqlAndMongo(carsFactoryContext);
                 //CarsFactoryMySQLData.GenerateProducts(carsFactoryContext);

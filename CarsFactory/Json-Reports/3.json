@@ -1,17 +1,17 @@
 {
   "CarType": {
-    "Id": 1,
-    "Name": "aRE"
+    "Id": 6,
+    "Name": "SUV"
   },
   "EngineType": {
-    "Id": 1,
-    "Name": "222"
+    "Id": 2,
+    "Name": "Diesel"
   },
   "Manufacturer": {
     "Name": "BMW"
   },
-  "Model": "Dido",
-  "HorsePower": 200,
-  "ReleaseYear": 1992,
-  "Price": 220.00
+  "Model": "BMW X5",
+  "HorsePower": 188,
+  "ReleaseYear": 1999,
+  "Price": 44000.00
 }
