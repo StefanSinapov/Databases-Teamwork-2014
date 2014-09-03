@@ -83,6 +83,10 @@
       <Project>{139e8d3d-dba2-4a78-9315-f5d539fd1fdf}</Project>
       <Name>CarsFactory.Models</Name>
     </ProjectReference>
+    <ProjectReference Include="..\CarsFactory.MongoDB.Data\CarsFactory.MongoDB.Data.csproj">
+      <Project>{D96B0268-9449-4DC2-814D-197AEFF0D250}</Project>
+      <Name>CarsFactory.MongoDB.Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CarsFactory.MySQL.Data\CarsFactory.MySQL.Data.csproj">
       <Project>{cafd1c7c-f0d5-485c-b75d-309422b7935c}</Project>
       <Name>CarsFactory.MySQL.Data</Name>
@@ -94,6 +98,10 @@
     <ProjectReference Include="..\CarsFactory.Reports\CarsFactory.Reports.csproj">
       <Project>{7283913d-0967-4b64-8434-8fd0f0630d44}</Project>
       <Name>CarsFactory.Reports</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CarsFactory.SQLite.Data\CarsFactory.SQLite.Data.csproj">
+      <Project>{d92d9cfb-d8d9-4a91-9eb0-d8ed652aa2dc}</Project>
+      <Name>CarsFactory.SQLite.Data</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

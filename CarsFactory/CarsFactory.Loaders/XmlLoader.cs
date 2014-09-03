@@ -6,7 +6,6 @@
 
     using CarsFactory.Models;
     using CarsFactory.Data;
-    using Data.MongoDb;
 
     public class XmlLoader
     {
@@ -16,7 +15,7 @@
         private const string nameAttribute = "name";
         private const string monthAttribute = "month";
 
-        public static void LoadXmlFile(CarsFactoryContext context, MongoDbDatabase mongoDb)
+        public static void LoadXmlFile(CarsFactoryContext context, MongoDbXmlLoader mongoDb)
         {
             using (XmlReader reader = XmlReader.Create(fileName))
             {
@@ -55,24 +54,24 @@
             }
         }
 
-        private static void AddManufacturer(CarsFactoryContext context, MongoDbDatabase mongoDb, string manufacturerName)
+        private static void AddManufacturer(CarsFactoryContext context, MongoDbXmlLoader mongoDb, string manufacturerName)
         {
             var manufacturerExists = context.Manufacturers.Any(m => m.Name == manufacturerName);
 
             if (!manufacturerExists)
             {
-                var manafacturer = new Manufacturer
+                var manufacturer = new Manufacturer
                 {
                     Name = manufacturerName
                 };
 
-                context.Manufacturers.Add(manafacturer);
+                context.Manufacturers.Add(manufacturer);
                 context.SaveChanges();
-                mongoDb.UploadManufacturer(manafacturer);
+                mongoDb.UploadManufacturer(manufacturer);
             }
         }
 
-        private static void AddMonth(CarsFactoryContext context, MongoDbDatabase mongoDb, string monthName)
+        private static void AddMonth(CarsFactoryContext context, MongoDbXmlLoader mongoDb, string monthName)
         {
             var monthExists = context.Months.Any(m => m.Name == monthName);
 
@@ -89,10 +88,10 @@
             }
         }
 
-        private static void AddExpense(CarsFactoryContext context, MongoDbDatabase mongoDb,
+        private static void AddExpense(CarsFactoryContext context, MongoDbXmlLoader mongoDb,
                     Manufacturer manufacturer,  Month selectedMonth, decimal expenseValue)
         {
-            var expenseExists = context.Expenses.Any(e => e.ManafacturerId == manufacturer.Id &&
+            var expenseExists = context.Expenses.Any(e => e.ManufacturerId == manufacturer.Id &&
                                                                          e.MonthId == selectedMonth.MonthId &&
                                                                          e.Value == expenseValue);
 
@@ -101,7 +100,7 @@
                 var expense = new Expense
                 {
                     MonthId = selectedMonth.MonthId,
-                    ManafacturerId = manufacturer.Id,
+                    ManufacturerId = manufacturer.Id,
                     Value = expenseValue
                 };
 

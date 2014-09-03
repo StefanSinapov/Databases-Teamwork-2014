@@ -13,10 +13,8 @@
 
         public virtual Month Month { get; set; }
 
-        public int ManafacturerId { get; set; }
+        public int ManufacturerId { get; set; }
 
-        public virtual Manufacturer Manafacturer { get; set; }
-
-        public string Name { get; set; }
+        public virtual Manufacturer Manufacturer { get; set; }
     }
 }

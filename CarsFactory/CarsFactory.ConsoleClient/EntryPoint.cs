@@ -1,109 +1,179 @@
 namespace CarsFactory.ConsoleClient
 {
     using System;
-    using System.Linq;
-
-    using CarsFactory.MySQL.Data;
+    using MySQL.Data;
     using Data;
-    using Data.MongoDb;
     using Loaders;
-    using Models;
-    using CarsFactory.Reports;
-    using MySQL;
-    using CarsFactory.Reports.Data;
+    using Reports;
+    using MongoDB.Data;
+    using Reports.Data;
 
     public class EntryPoint
     {
         public static void Main()
         {
-            TestMsSqlServer();
+            StartApplication();
         }
 
-        private static void TestMsSqlServer()
+        private static void StartApplication()
         {
             var carsFactoryContext = new CarsFactoryContext();
             var collector = new ReportsDataCollector();
+            var mongoDbContext = new MongoDbContext();
 
             using (carsFactoryContext)
             {
-                //Console.WriteLine("Connecting to MS SQL Server...");
-                //LoadDataFromMongoDb(carsFactoryContext);
-                //ZipReadingAndImporting(carsFactoryContext);
-                //TestAddData(carsFactoryContext);
-                //TestReadData(carsFactoryContext);
-                //TestRemoveData(carsFactoryContext);
-                
-                //PdfReport.GeneratePdfReport(carsFactoryContext, collector);
-                //JsonRepor.GenerateJsonReports(carsFactoryContext, collector);
-                //XmlReport.GenerateXmlReports(carsFactoryContext, collector);
-                //LoadXmlFileToSqlAndMongo(carsFactoryContext);
-                //CarsFactoryMySQLData.GenerateProducts(carsFactoryContext);
-                //ExcelReport.GenerateExcelReports();
+
+                LoadDataFromMongoDb(carsFactoryContext, mongoDbContext);
+                ZipReadingAndImporting(carsFactoryContext);
+
+                GeneratePdfReports(carsFactoryContext, collector);
+                GenerateXmlReports(carsFactoryContext, collector);
+                GenerateJsonReports(carsFactoryContext, collector);
+                LoadXmlFileToSqlAndMongo(carsFactoryContext, mongoDbContext);
+                GenerateExcelReports();
             }
         }
 
-        private static void LoadXmlFileToSqlAndMongo(CarsFactoryContext carsFactoryContext)
+        private static void GenerateExcelReports()
         {
-            var mongoDb = new MongoDbDatabase();
-            XmlLoader.LoadXmlFile(carsFactoryContext, mongoDb);
+            TaskOperationMessage("Problem #6 –Excel data");
+            const string operationText = "Generating Excel report";
+            try
+            {
+                ExcelReport.GenerateExcelReports();
+                SuccessOperationMessage(operationText);
+            }
+            catch
+            {
+                ErrorOperationMessage(operationText);
+            }
         }
 
-        private static void LoadDataFromMongoDb(CarsFactoryContext context)
+        private static void GenerateXmlReports(CarsFactoryContext carsFactoryContext, ReportsDataCollector collector)
+        {
+            TaskOperationMessage("Problem #3 – Generate XML Report");
+            const string operationText = "Generating XML report";
+            try
+            {
+                XmlReport.GenerateXmlReports(carsFactoryContext, collector);
+                SuccessOperationMessage(operationText);
+            }
+            catch
+            {
+                ErrorOperationMessage(operationText);
+            }
+        }
+
+        private static void GenerateJsonReports(CarsFactoryContext carsFactoryContext, ReportsDataCollector collector)
+        {
+            TaskOperationMessage("Problem #4 – JSON Reports");
+            const string operationText = "Generating JSON report";
+            try
+            {
+                JsonRepor.GenerateJsonReports(carsFactoryContext, collector);
+                SuccessOperationMessage(operationText);
+            }
+            catch
+            {
+                ErrorOperationMessage(operationText);
+            }
+
+            try
+            {
+                CarsFactoryMySQLData.GenerateProducts(carsFactoryContext);
+                SuccessOperationMessage("Data loading to MySQL");
+            }
+            catch (Exception)
+            {
+                ErrorOperationMessage("data loading to MySQL");
+            }
+        }
+
+        private static void GeneratePdfReports(CarsFactoryContext carsFactoryContext, ReportsDataCollector collector)
+        {
+            TaskOperationMessage("Problem #2 – Generate PDF Reports");
+            const string operationText = "Generating PDF report";
+            try
+            {
+                PdfReport.GeneratePdfReport(carsFactoryContext, collector);
+                SuccessOperationMessage(operationText);
+
+            }
+            catch
+            {
+                ErrorOperationMessage(operationText);
+            }
+        }
+
+        private static void LoadXmlFileToSqlAndMongo(CarsFactoryContext carsFactoryContext, MongoDbContext mongoDbContext)
+        {
+            TaskOperationMessage("Problem #5. Load data from XML");
+
+            const string operationText = "Reading XML Data";
+            try
+            {
+                var mongoDbXmlLoader = new MongoDbXmlLoader(mongoDbContext);
+                XmlLoader.LoadXmlFile(carsFactoryContext, mongoDbXmlLoader);
+                SuccessOperationMessage(operationText);
+
+            }
+            catch
+            {
+                ErrorOperationMessage(operationText);
+            }
+        }
+
+        private static void LoadDataFromMongoDb(CarsFactoryContext carsFactoryContext, MongoDbContext mongoDbContext)
         {
             Console.WriteLine("Loading Data From MongoDB to MS SQL Server...");
 
-            var mongoDb = new MongoDbDatabase();
-            mongoDb.LoadAllDataToMsSql(context);
+            var mongoDbLoader = new MongoDbToSqlLoader(carsFactoryContext, mongoDbContext);
+            int newRecordsCount = mongoDbLoader.LoadAll();
 
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("     Done");
-            Console.ResetColor();
+            Console.WriteLine("     {0} new record(s) added", newRecordsCount);
+            SuccessOperationMessage("Loading from MongoDb");
         }
 
         private static void ZipReadingAndImporting(CarsFactoryContext carsFactoryContext)
         {
+            TaskOperationMessage("Problem #1 – Load Excel Reports from ZIP File");
+
             var zipPath = @"..\..\..\Sample-Sales-Reports.zip";
             var unzipDirectory = @"..\..\..\TempExtractZip";
-
             var zipReader = new ZipImporter(zipPath, unzipDirectory);
 
-            zipReader.ReadAndImport(carsFactoryContext);
-        }
-
-        private static void TestRemoveData(CarsFactoryContext carsFactoryContext)
-        {
-            var coutry = carsFactoryContext.Countries.FirstOrDefault();
-            carsFactoryContext.Countries.Remove(coutry);
             try
             {
-                var changes = carsFactoryContext.SaveChanges();
-                Console.WriteLine("{0} row(s) removed.", changes);
+                zipReader.ReadAndImport(carsFactoryContext);
+
+                SuccessOperationMessage("Unzipping");
             }
-            catch (Exception ex)
+            catch
             {
-                Console.WriteLine(ex.Message);
+                ErrorOperationMessage("unzipping");
             }
         }
 
-        private static void TestAddData(CarsFactoryContext carsFactoryContext)
+        private static void SuccessOperationMessage(string operation)
         {
-            var country = new Country
-            {
-                Name = "Sofia"
-            };
-            carsFactoryContext.Countries.Add(country);
-            var changes = carsFactoryContext.SaveChanges();
-            Console.WriteLine("{0} row(s) added.", changes);
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("     {0} done.", operation);
+            Console.ResetColor();
         }
 
-        private static void TestReadData(CarsFactoryContext carsFactoryContext)
+        private static void TaskOperationMessage(string text)
         {
-            var countries = carsFactoryContext.Countries;
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine(text);
+            Console.ResetColor();
+        }
 
-            foreach (var country in countries)
-            {
-                Console.WriteLine("Id: {0}, Name: {1}", country.Id, country.Name);
-            }
+        private static void ErrorOperationMessage(string reason)
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("Ops, something went wrong during {0}!", reason);
+            Console.ResetColor();
         }
     }
 }
