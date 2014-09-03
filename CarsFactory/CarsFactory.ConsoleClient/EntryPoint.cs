@@ -32,7 +32,7 @@ namespace CarsFactory.ConsoleClient
                 //TestAddData(carsFactoryContext);
                 //TestReadData(carsFactoryContext);
                 //TestRemoveData(carsFactoryContext);
-                //
+                
                 //PdfReport.GeneratePdfReport(carsFactoryContext, collector);
                 //JsonRepor.GenerateJsonReports(carsFactoryContext, collector);
                 //XmlReport.GenerateXmlReports(carsFactoryContext, collector);
