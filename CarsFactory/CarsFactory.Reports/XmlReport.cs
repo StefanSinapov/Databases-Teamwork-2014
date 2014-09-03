@@ -11,12 +11,12 @@
 
     public class XmlReport
     {
-        public static void GenerateXmlReports(CarsFactoryContext context)
+        public static void GenerateXmlReports(CarsFactoryContext context, ReportsDataCollector collector)
         {
             string xmlReportPath = @"..\..\..\Xml-Reports\Sales-by-Dealers-report.xml";
             Encoding encoding = Encoding.GetEncoding("utf-8");
 
-            var dealers = CollectReportsData.CollectDataForXmlReport(context);
+            var dealers = collector.CollectDataForXmlReport(context);
 
             using (XmlTextWriter writer = new XmlTextWriter(xmlReportPath, encoding))
             {
@@ -27,7 +27,6 @@
                 writer.WriteStartDocument();
                 writer.WriteStartElement("sales");
 
-                // record is KeyValuePair<string, ICollection<SalesReport>> 
                 foreach (var record in dealers)
                 {
                     var dealerName = record.Key;

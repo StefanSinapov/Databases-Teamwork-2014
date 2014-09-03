@@ -3,19 +3,20 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+
     using CarsFactory.Data;
     using CarsFactory.Models;
 
-    public static class CollectReportsData
+    public class ReportsDataCollector
     {
-        public static ICollection<Product> CollectDataForJsonReport(CarsFactoryContext carsFactoryContext)
+        public ICollection<Product> CollectDataForJsonReport(CarsFactoryContext carsFactoryContext)
         {
             var productsList = carsFactoryContext.Products.SqlQuery("SELECT * FROM PRODUCTS").ToList();
 
             return productsList;
         }
 
-        public static Dictionary<string, ICollection<SalesReport>> CollectDataForXmlReport(CarsFactoryContext carsFactoryContext)
+        public Dictionary<string, ICollection<SalesReport>> CollectDataForXmlReport(CarsFactoryContext carsFactoryContext)
         {
             var dealers = carsFactoryContext.Dealers.Select(d => new
             {
@@ -33,7 +34,7 @@
             return result;
         }
 
-        public static SalesReportData CollectDataForPdfReport(CarsFactoryContext carsFactoryContext)
+        public SalesReportData CollectDataForPdfReport(CarsFactoryContext carsFactoryContext)
         {
             var salesByDate = carsFactoryContext
                 .Sales

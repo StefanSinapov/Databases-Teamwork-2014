@@ -10,9 +10,9 @@
 
     public static class JsonRepor
     {
-        public static void GenerateJsonReports(CarsFactoryContext carsFactoryContext)
+        public static void GenerateJsonReports(CarsFactoryContext carsFactoryContext, ReportsDataCollector collector)
         {
-            var productsList = CollectReportsData.CollectDataForJsonReport(carsFactoryContext); //carsFactoryContext.Products.SqlQuery("SELECT * FROM PRODUCTS").ToList();
+            var productsList = collector.CollectDataForJsonReport(carsFactoryContext); //carsFactoryContext.Products.SqlQuery("SELECT * FROM PRODUCTS").ToList();
 
             foreach (var item in productsList)
             {

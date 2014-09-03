@@ -20,11 +20,11 @@
         private const string TITLE = "Aggregated Sales Report";
         private const int HEIGHT_SHIFT = 5;
 
-        public static void GeneratePdfReport(CarsFactoryContext carsFactoryContext)
+        public static void GeneratePdfReport(CarsFactoryContext carsFactoryContext, ReportsDataCollector collector)
         {
             PdfDocument pdfReport = InitializePdfDocument();
 
-            SalesReportData reportData = CollectReportsData.CollectDataForPdfReport(carsFactoryContext);
+            SalesReportData reportData = collector.CollectDataForPdfReport(carsFactoryContext);
 
             PdfGrid grid = null;
 

@@ -10,6 +10,7 @@ namespace CarsFactory.ConsoleClient
     using Models;
     using CarsFactory.Reports;
     using MySQL;
+    using CarsFactory.Reports.Data;
 
     public class EntryPoint
     {
@@ -21,6 +22,8 @@ namespace CarsFactory.ConsoleClient
         private static void TestMsSqlServer()
         {
             var carsFactoryContext = new CarsFactoryContext();
+            var collector = new ReportsDataCollector();
+
             using (carsFactoryContext)
             {
                 //Console.WriteLine("Connecting to MS SQL Server...");
@@ -30,9 +33,9 @@ namespace CarsFactory.ConsoleClient
                 //TestReadData(carsFactoryContext);
                 //TestRemoveData(carsFactoryContext);
 
-                PdfReport.GeneratePdfReport(carsFactoryContext);
-                //JsonRepor.GenerateJsonReports(carsFactoryContext);
-                //XmlReport.GenerateXmlReports(carsFactoryContext);
+                //PdfReport.GeneratePdfReport(carsFactoryContext, collector);
+                //JsonRepor.GenerateJsonReports(carsFactoryContext, collector);
+                //XmlReport.GenerateXmlReports(carsFactoryContext, collector);
                 //LoadXmlFileToSqlAndMongo(carsFactoryContext);
                 //CarsFactoryMySQLData.GenerateProducts(carsFactoryContext);
                 //ExcelReport.GenerateExcelReports();
