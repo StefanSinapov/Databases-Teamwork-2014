@@ -41,15 +41,24 @@
     <Reference Include="EntityFramework.SqlServer">
       <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="EPPlus">
+      <HintPath>..\packages\EPPlus.3.1.3\lib\net35\EPPlus.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Remotion.Data.Linq">
+      <HintPath>..\packages\Remotion.Data.Linq.1.0.0\lib\NET40\Remotion.Data.Linq.dll</HintPath>
     </Reference>
     <Reference Include="Spire.License">
       <HintPath>..\packages\FreeSpire.PDF.3.0\lib\net40\Spire.License.dll</HintPath>
     </Reference>
     <Reference Include="Spire.Pdf">
       <HintPath>..\packages\FreeSpire.PDF.3.0\lib\net40\Spire.Pdf.dll</HintPath>
+    </Reference>
+    <Reference Include="SysdataExcelPackage">
+      <HintPath>..\packages\SysdataExcelPackage40.1.2.3\lib\net45\SysdataExcelPackage.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -74,6 +83,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ExcelReport.cs" />
     <Compile Include="JsonRepor.cs" />
     <Compile Include="PdfReport.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -92,9 +102,21 @@
       <Project>{139e8d3d-dba2-4a78-9315-f5d539fd1fdf}</Project>
       <Name>CarsFactory.Models</Name>
     </ProjectReference>
+    <ProjectReference Include="..\CarsFactory.MySQL.Data\CarsFactory.MySQL.Data.csproj">
+      <Project>{cafd1c7c-f0d5-485c-b75d-309422b7935c}</Project>
+      <Name>CarsFactory.MySQL.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CarsFactory.MySQL.Models\CarsFactory.MySQL.Models.csproj">
+      <Project>{6f9c2621-695c-4bde-881b-157dcaa75c07}</Project>
+      <Name>CarsFactory.MySQL.Models</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CarsFactory.Reports.Data\CarsFactory.Reports.Data.csproj">
       <Project>{d08f9979-0a5c-4380-a66f-ddd1807a0785}</Project>
       <Name>CarsFactory.Reports.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CarsFactory.SQLite.Data\CarsFactory.SQLite.Data.csproj">
+      <Project>{d92d9cfb-d8d9-4a91-9eb0-d8ed652aa2dc}</Project>
+      <Name>CarsFactory.SQLite.Data</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

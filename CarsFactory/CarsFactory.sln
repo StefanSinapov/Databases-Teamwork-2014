@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30501.0
+VisualStudioVersion = 12.0.30723.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarsFactory.Models", "CarsFactory.Models\CarsFactory.Models.csproj", "{139E8D3D-DBA2-4A78-9315-F5D539FD1FDF}"
 EndProject
@@ -18,6 +18,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarsFactory.MySQL.Models", "CarsFactory.MySQL.Models\CarsFactory.MySQL.Models.csproj", "{6F9C2621-695C-4BDE-881B-157DCAA75C07}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarsFactory.Reports.Data", "CarsFactory.Reports.Data\CarsFactory.Reports.Data.csproj", "{D08F9979-0A5C-4380-A66F-DDD1807A0785}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarsFactory.SQLite.Data", "CarsFactory.SQLite.Data\CarsFactory.SQLite.Data.csproj", "{D92D9CFB-D8D9-4A91-9EB0-D8ED652AA2DC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -57,6 +59,10 @@ Global
 		{D08F9979-0A5C-4380-A66F-DDD1807A0785}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D08F9979-0A5C-4380-A66F-DDD1807A0785}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D08F9979-0A5C-4380-A66F-DDD1807A0785}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D92D9CFB-D8D9-4A91-9EB0-D8ED652AA2DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D92D9CFB-D8D9-4A91-9EB0-D8ED652AA2DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D92D9CFB-D8D9-4A91-9EB0-D8ED652AA2DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D92D9CFB-D8D9-4A91-9EB0-D8ED652AA2DC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

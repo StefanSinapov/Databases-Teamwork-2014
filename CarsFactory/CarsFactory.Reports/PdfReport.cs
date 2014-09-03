@@ -1,46 +1,54 @@
 ﻿namespace CarsFactory.Reports
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Drawing;
-
     using Spire.Pdf;
     using Spire.Pdf.Graphics;
-    using Spire.Pdf.Tables;
+    using Spire.Pdf.Grid;
     using CarsFactory.Data;
+    using Data;
 
     public static class PdfReport
     {
         // verticalDistance keeps the current vertical position in the page
         private static float verticalDistanceToTheTop = 0;
+
+        private static readonly string[] CAPTIONS = new string[] { "Product", "Quantity", "Unit Price", "Dealer", "Sum" };
+       
         private const string TITLE = "Aggregated Sales Report";
         private const int HEIGHT_SHIFT = 5;
 
         public static void GeneratePdfReport(CarsFactoryContext carsFactoryContext)
         {
-
             PdfDocument pdfReport = InitializePdfDocument();
 
-            //get agragate data about the sales --var productsList = carsFactoryContext.Products.SqlQuery("SELECT * FROM PRODUCTS").ToList();
-            //foreach day ...
-            String[] a = new String[100];
-            String[][] data = FormatData(a);
-            PdfTable table = GenerateTable(data);
-            AddTableToPage(table, pdfReport);
-            AddTableToPage(table, pdfReport);
-            AddTableToPage(table, pdfReport);
-            AddTableToPage(table, pdfReport);
-            AddTableToPage(table, pdfReport);
-            AddTableToPage(table, pdfReport);
-            AddTableToPage(table, pdfReport);
-            AddTableToPage(table, pdfReport);
-            AddTableToPage(table, pdfReport);
-            AddTableToPage(table, pdfReport);
-            AddTableToPage(table, pdfReport);
-            AddTableToPage(table, pdfReport);
-            AddTableToPage(table, pdfReport);
-            AddTableToPage(table, pdfReport);
-            AddTableToPage(table, pdfReport);
+            SalesReportData reportData = CollectReportsData.CollectDataForPdfReport(carsFactoryContext);
+
+            PdfGrid grid = null;
+
+            foreach (var day in reportData.DailySalesReport)
+            {
+                if (grid != null)
+                {
+                    AddGridToPage(grid, pdfReport);
+                }
+
+                DateTime date = day.Key;
+                var dailyAmount = day.Value.Key;
+                var records = day.Value.Value;
+                records.Insert(0, CAPTIONS);
+
+                grid = GenerateDataGrid(records, date, dailyAmount);
+            }
+
+            if (grid != null)
+            {
+                AddTotal("Grand Total:", reportData.GrandTotal, grid);
+                AddGridToPage(grid, pdfReport);
+            }
+
             SaveAndClose(pdfReport);
         }
 
@@ -58,60 +66,59 @@
             return doc;
         }
 
-        private static String[][] FormatData(String[] data)
+        private static PdfGrid GenerateDataGrid(List<string[]> dataSource, DateTime date, decimal dailyAmount)
         {
-            String[] tmpData = {
-                            "Name;Capital;Continent;Area;Population",
-                            "Argentina;Buenos Aires;South America;2777815;32300003",
-                            "Bolivia;La Paz;South America;1098575;7300000",
-                            "Brazil;Brasilia;South America;8511196;150400000",
-                            "Canada;Ottawa;North America;9976147;26500000",
-                            };
-            data = tmpData;
+            PdfGrid grid = new PdfGrid();
+            grid.Style.CellPadding = new PdfPaddings(3, 2, 3, 1);
 
-            String[][] dataSource = new String[data.Length][];
+            grid.Style.Font = new PdfTrueTypeFont(new Font("Arial", 10f));
 
-            for (int i = 0; i < data.Length; i++)
+            grid.DataSource = dataSource.ToArray();
+
+            AddHeaderDateRow(grid, date);
+
+            for (int r = 0; r < dataSource.Count; r++)
             {
-                dataSource[i] = data[i].Split(';');
+                if (r == 0)
+                {
+                    SetHeaderRowStyle(grid.Rows[r]);
+                }
+                else
+                {
+                    if (r % 2 == 0)
+                    {
+                        grid.Rows[r].Style.BackgroundBrush = PdfBrushes.AliceBlue;
+                    }
+                }
             }
 
-            return dataSource;
-        }
+            AddTotal(String.Format("Total sum for {0:dd-MMM-yyyy}:", date), dailyAmount, grid);
 
-        private static PdfTable GenerateTable(String[][] dataSource)
+            return grid;
+        }
+ 
+        private static void AddTotal(String description, decimal totalAmount, PdfGrid grid)
         {
-            PdfTable table = new PdfTable();
-            table.Style.CellPadding = 2;
-            table.Style.HeaderSource = PdfHeaderSource.Rows;
-            table.Style.HeaderRowCount = 1;
-            table.Style.ShowHeader = true;
-            table.DataSource = dataSource;
-            table.AllowCrossPages = true;
-
-            return table;
+            PdfGridRow totalAmountRow = grid.Rows.Add();
+            totalAmountRow.Style.BackgroundBrush = PdfBrushes.Lavender;
+            totalAmountRow.Style.Font = new PdfTrueTypeFont(new Font("Arial", 11f, FontStyle.Bold));
+            totalAmountRow.Cells[0].Value = description;
+            totalAmountRow.Cells[0].StringFormat = new PdfStringFormat(PdfTextAlignment.Right);
+            totalAmountRow.Cells[0].ColumnSpan = 4;
+            totalAmountRow.Cells[4].Value = totalAmount.ToString();
         }
 
-        private static void AddTableToPage(PdfTable table, PdfDocument doc)
+        private static void AddGridToPage(PdfGrid grid, PdfDocument doc)
         {
             PdfPageBase page = doc.Sections[0].Pages[doc.Sections[0].Pages.Count - 1];
 
-            float tableHeight = table.Rows.Count * table.Style.DefaultStyle.Font.Height * 1.5f;
-
-            if (verticalDistanceToTheTop > (page.Canvas.ClientSize.Height - doc.PageSettings.Margins.Bottom - tableHeight))
-            {
-                page = doc.Sections[0].Pages.Add();
-                verticalDistanceToTheTop = doc.PageSettings.Margins.Top;
-            }
-
-            PdfLayoutResult result = table.Draw(page, new PointF(2, verticalDistanceToTheTop));
-
+            PdfLayoutResult result = grid.Draw(page, new PointF(2, verticalDistanceToTheTop));
             verticalDistanceToTheTop = verticalDistanceToTheTop + result.Bounds.Height + HEIGHT_SHIFT;
         }
 
         private static void SaveAndClose(PdfDocument doc)
         {
-            doc.SaveToFile(@"..\..\..\PDF-Reports\SampleReport.pdf");
+            doc.SaveToFile(@"..\..\..\PDF-Reports\Aggregated Sales Report.pdf");
             doc.Close();
         }
 
@@ -129,15 +136,26 @@
 
         private static void DrawTitle(PdfPageBase page)
         {
-            PdfStringFormat format;
-            PdfTrueTypeFont font;
-
             PdfBrush brush = PdfBrushes.Black;
-            font = new PdfTrueTypeFont(new Font("Arial", 14f, FontStyle.Bold));
-            format = new PdfStringFormat(PdfTextAlignment.Center);
+            PdfTrueTypeFont font = new PdfTrueTypeFont(new Font("Arial", 14f, FontStyle.Bold));
+            PdfStringFormat format = new PdfStringFormat(PdfTextAlignment.Center);
             page.Canvas.DrawString(TITLE, font, brush, page.Canvas.ClientSize.Width / 2, 0, format);
 
             verticalDistanceToTheTop += font.MeasureString(TITLE, format).Height + HEIGHT_SHIFT;
+        }
+        
+        private static void AddHeaderDateRow(PdfGrid grid, DateTime date)
+        {
+            PdfGridRow headerDateRow = grid.Headers.Add(1)[0];
+            headerDateRow.Cells[0].Value = String.Format("Date {0:dd-MMM-yyyy}:", date);
+            headerDateRow.Cells[0].ColumnSpan = 5;
+            SetHeaderRowStyle(headerDateRow);
+        }
+
+        private static void SetHeaderRowStyle(PdfGridRow row)
+        {
+            row.Style.BackgroundBrush = PdfBrushes.CadetBlue;
+            row.Style.Font = new PdfTrueTypeFont(new Font("Arial", 11f, FontStyle.Bold), true);
         }
     }
 }
