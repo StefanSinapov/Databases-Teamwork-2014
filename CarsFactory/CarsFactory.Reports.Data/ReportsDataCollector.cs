@@ -6,6 +6,7 @@
 
     using CarsFactory.Data;
     using CarsFactory.Models;
+    using System.Globalization;
 
     public class ReportsDataCollector
     {
@@ -63,7 +64,7 @@
                 List<string[]> soldProducts = new List<string[]>();
                 foreach (var item in day.Sales)
                 {
-                    string[] row = { item.Product, item.Quantity.ToString(), item.UnitPrice.ToString(), item.Dealer, item.Sum.ToString() };
+                    string[] row = { item.Product, item.Quantity.ToString(), item.UnitPrice.ToString("N", CultureInfo.InvariantCulture), item.Dealer, item.Sum.ToString("N", CultureInfo.InvariantCulture) };
                     dailyTotal += item.Sum;
                     soldProducts.Add(row);
                 }

@@ -9,6 +9,7 @@
     using Spire.Pdf.Grid;
     using CarsFactory.Data;
     using Data;
+    using System.Globalization;
 
     public static class PdfReport
     {
@@ -16,9 +17,9 @@
         private static float verticalDistanceToTheTop = 0;
 
         private static readonly string[] CAPTIONS = new string[] { "Product", "Quantity", "Unit Price", "Dealer", "Sum" };
-       
+
         private const string TITLE = "Aggregated Sales Report";
-        private const int HEIGHT_SHIFT = 5;
+        private const int HEIGHT_SHIFT = 20;
 
         public static void GeneratePdfReport(CarsFactoryContext carsFactoryContext, ReportsDataCollector collector)
         {
@@ -27,7 +28,6 @@
             SalesReportData reportData = collector.CollectDataForPdfReport(carsFactoryContext);
 
             PdfGrid grid = null;
-
             foreach (var day in reportData.DailySalesReport)
             {
                 if (grid != null)
@@ -96,7 +96,7 @@
 
             return grid;
         }
- 
+
         private static void AddTotal(String description, decimal totalAmount, PdfGrid grid)
         {
             PdfGridRow totalAmountRow = grid.Rows.Add();
@@ -105,12 +105,20 @@
             totalAmountRow.Cells[0].Value = description;
             totalAmountRow.Cells[0].StringFormat = new PdfStringFormat(PdfTextAlignment.Right);
             totalAmountRow.Cells[0].ColumnSpan = 4;
-            totalAmountRow.Cells[4].Value = totalAmount.ToString();
+            totalAmountRow.Cells[4].Value = totalAmount.ToString("N", CultureInfo.InvariantCulture);
         }
 
         private static void AddGridToPage(PdfGrid grid, PdfDocument doc)
         {
             PdfPageBase page = doc.Sections[0].Pages[doc.Sections[0].Pages.Count - 1];
+
+            float totalHeight = grid.Rows.Count * grid.Style.Font.Height;
+
+            if (verticalDistanceToTheTop > (page.Canvas.ClientSize.Height - doc.PageSettings.Margins.Bottom - totalHeight))
+            {
+                page = doc.Sections[0].Pages.Add();
+                verticalDistanceToTheTop = 0;
+            }
 
             PdfLayoutResult result = grid.Draw(page, new PointF(2, verticalDistanceToTheTop));
             verticalDistanceToTheTop = verticalDistanceToTheTop + result.Bounds.Height + HEIGHT_SHIFT;
@@ -128,7 +136,7 @@
 
             PdfUnitConvertor unitCvtr = new PdfUnitConvertor();
 
-            margin.Top = unitCvtr.ConvertUnits(2f, PdfGraphicsUnit.Centimeter, PdfGraphicsUnit.Point);
+            margin.Top = unitCvtr.ConvertUnits(1f, PdfGraphicsUnit.Centimeter, PdfGraphicsUnit.Point);
             margin.Bottom = margin.Top;
             margin.Left = unitCvtr.ConvertUnits(2f, PdfGraphicsUnit.Centimeter, PdfGraphicsUnit.Point);
             margin.Right = margin.Left;
@@ -143,7 +151,7 @@
 
             verticalDistanceToTheTop += font.MeasureString(TITLE, format).Height + HEIGHT_SHIFT;
         }
-        
+
         private static void AddHeaderDateRow(PdfGrid grid, DateTime date)
         {
             PdfGridRow headerDateRow = grid.Headers.Add(1)[0];
