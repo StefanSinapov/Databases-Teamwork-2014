@@ -24,13 +24,13 @@ namespace CarsFactory.ConsoleClient
             using (carsFactoryContext)
             {
                 //Console.WriteLine("Connecting to MS SQL Server...");
-                //LoadDataFromMongoDb(carsFactoryContext);
+                LoadDataFromMongoDb(carsFactoryContext);
                 //ZipReadingAndImporting(carsFactoryContext);
                 //TestAddData(carsFactoryContext);
                 //TestReadData(carsFactoryContext);
                 //TestRemoveData(carsFactoryContext);
 
-                PdfReport.GeneratePdfReport(carsFactoryContext);
+                //PdfReport.GeneratePdfReport(carsFactoryContext);
                 JsonRepor.GenerateJsonReports(carsFactoryContext);
                 XmlReport.GenerateXmlReports(carsFactoryContext);
                 LoadXmlFileToSqlAndMongo(carsFactoryContext);

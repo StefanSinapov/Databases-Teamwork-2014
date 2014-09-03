@@ -6,7 +6,7 @@
 
     public class CarsFactorySQLiteData
     {
-        private const string StringConnection = @"Data Source=../../../CarsFactoryDB.db;Version=3;";
+        private const string StringConnection = @"Data Source=../../../SQLite Database/CarsFactoryDB.db;Version=3;";
 
         private SQLiteConnection dbCon;
 
